@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: cms
+      MYSQL_USER: salanesh
+      MYSQL_PASSWORD: wakwak123
+      MYSQL_ROOT_PASSWORD: Mk22j-HGy23.B84_aSd
+    volumes:
+      - cms-db-data:/var/lib/mysql
+    networks:
+      - cms-network
+
+  cms-app:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/var/www/html
+      - ./configs/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - cms-network
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: Mk22j-HGy23.B84_aSd
+    networks:
+      - cms-network
+
+networks:
+  cms-network:
+    driver: bridge
+
+volumes:
+  cms-db-data:
