@@ -3,43 +3,45 @@
         <tr>
             <th>ID</th>
             <th>Author</th>
-            <th>Title</th>
-            <th>Category</th>
+            <th>Email</th>
+            <th>Comment</th>
             <th>Status</th>
-            <th>Image</th>
-            <th>Tags</th>
-            <th>Comments</th>
+            <th>In Response to</th>
             <th>Date</th>
+            <th>Approve</th>
+            <th>UnApprove</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
         <?php
-        $stmt = $connection->prepare("SELECT p.post_id,p.post_title,p.post_author,p.post_date,p.post_image,p.post_content,p.post_tags,
-        p.post_comment_count,p.post_status,c.cat_title FROM posts p,category c WHERE p.post_category_id=c.cat_id;");
+        $stmt = $connection->prepare("SELECT * FROM comments");
         $stmt->execute();
         $result = $stmt->get_result();
         while ($row = $result->fetch_assoc()) {
-            $post_id = $row["post_id"];
-            $post_author = $row["post_author"];
-            $post_title = $row["post_title"];
-            $cat_title = $row["cat_title"];
-            $post_status = $row["post_status"];
-            $post_image = $row["post_image"];
-            $post_tags = $row["post_tags"];
-            $post_comment_count = $row["post_comment_count"];
-            $post_date = $row["post_date"];
+            $comment_id = $row["comment_id"];
+            // $comment_post_id = $row["comment_post_id"];
+            $comment_author = $row["comment_author"];
+            $comment_email = $row["comment_email"];
+            $comment_content = $row["comment_content"];
+            $comment_status = $row["comment_status"];
+            $comment_date = $row["comment_date"];
+            $comment_response = "someone";
+
             echo "<tr>";
-            echo "<td>{$post_id}</td>";
-            echo "<td>{$post_author}</td>";
-            echo "<td>{$post_title}</td>";
-            echo "<td>{$cat_title}</td>";
-            echo "<td>{$post_status}</td>";
-            echo "<td><img width='100' src='../images/{$post_image}' alt='image'></td>";
-            echo "<td>{$post_tags}</td>";
-            echo "<td>{$post_comment_count}</td>";
-            echo "<td>{$post_date}</td>";
-            echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
+            echo "<td>{$comment_id}</td>";
+            // echo "<td>{$comment_post_id}</td>";
+            echo "<td>{$comment_author}</td>";
+            echo "<td>{$comment_email}</td>";
+            echo "<td>{$comment_content}</td>";
+            echo "<td>{$comment_status}</td>";
+            echo "<td>{$comment_response}</td>";
+            echo "<td>{$comment_date}</td>";
+            echo "<td><a href''>Approve</a></td>";
+            echo "<td><a href''>UnApprove</a></td>";
+            echo "<td><a href='comments.php?source=edit_comment&p_id={$comment_id}'>Edit</a></td>";
+            echo "<td><a href='comments.php?delete={$comment_id}'>Delete</a></td>";
             echo "</tr>";
         }
         $stmt->close();
