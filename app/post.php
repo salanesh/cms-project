@@ -60,12 +60,23 @@ include "includes/header.php";
                 $comment_content = $_POST["comment_content"];
                 $comment_status = "unapproved";
                 $now = date("Y-m-d");
+                $one = 1;
 
-
-                $query = $connection->prepare("INSERT INTO comments(comment_post_id,comment_author,comment_email,comment_content,comment_status,comment_date) VALUES(?,?,?,?,?,?)");
-                $query->bind_param("isssss", $post_id, $comment_author, $comment_email, $comment_content, $comment_status, $now);
-                $query->execute();
-                $query->close();
+                try {
+                    $connection->autocommit(FALSE);
+                    $query1 = $connection->prepare("INSERT INTO comments(comment_post_id,comment_author,comment_email,comment_content,comment_status,comment_date) VALUES(?,?,?,?,?,?)");
+                    $query2 = $connection->prepare("UPDATE posts SET post_comment_count=post_comment_count+? WHERE post_id=?");
+                    $query1->bind_param("isssss", $post_id, $comment_author, $comment_email, $comment_content, $comment_status, $now);
+                    $query2->bind_param("ii", $one, $post_id);
+                    $query1->execute();
+                    $query2->execute();
+                    $query1->close();
+                    $query2->close();
+                    $connection->autocommit(TRUE);
+                } catch (Exception $e) {
+                    $connection->rollback();
+                    throw $e;
+                }
             }
             ?>
             <!-- Comments Form -->
