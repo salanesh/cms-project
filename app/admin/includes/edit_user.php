@@ -22,6 +22,7 @@ if (isset($_POST['update_post'])) {
     $user_firstname = $_POST['user_firstname'];
     $user_lastname = $_POST['user_lastname'];
     $user_email = $_POST['user_email'];
+    $user_role = $_POST['user_role'];
 
     $user_image = $_FILES['user_image']['name'];
     $user_image_temp = $_FILES['user_image']['tmp_name'];
@@ -35,8 +36,8 @@ if (isset($_POST['update_post'])) {
     }
     move_uploaded_file($user_image_temp, "../images/$user_image");
 
-    $stmt = $connection->prepare("UPDATE users SET username=?,user_password=?,user_firstname=?,user_lastname=?,user_image=?,user_email=? WHERE user_id = ?");
-    $stmt->bind_param("ssssssi", $username, $user_password, $user_firstname, $user_lastname, $user_image, $user_email, $_GET['user_id']);
+    $stmt = $connection->prepare("UPDATE users SET username=?,user_password=?,user_firstname=?,user_lastname=?,user_image=?,user_email=?,user_role=? WHERE user_id = ?");
+    $stmt->bind_param("sssssssi", $username, $user_password, $user_firstname, $user_lastname, $user_image, $user_email, $user_role, $_GET['user_id']);
     $stmt->execute();
     $stmt->close();
     header("Location: users.php");
@@ -62,6 +63,19 @@ if (isset($_POST['update_post'])) {
     <div class="form-group">
         <label for="user_email">Email Address</label>
         <input type="email" value="<?php echo $user_email; ?>" name="user_email" id="user_email" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="user_role">Role</label>
+        <select name="user_role" id="user_role">
+            <?php
+            echo "<option value='{$user_role}'>$user_role</option>";
+            if ($user_role == 'admin') {
+                echo "<option value='subscriber'>Subscriber</option>";
+            } else {
+                echo "<option value='admin'>Admin</option>";
+            }
+            ?>
+        </select>
     </div>
     <div class="form-group">
         <label for="user_image">User Image:</label>
