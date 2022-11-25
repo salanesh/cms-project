@@ -16,7 +16,7 @@ if (isset($_GET['user_id'])) {
     }
     $stmt->close();
 }
-if (isset($_POST['update_post'])) {
+if (isset($_POST['update_user'])) {
     $username = $_POST['username'];
     $user_password = $_POST['user_password'];
     $user_firstname = $_POST['user_firstname'];
@@ -83,7 +83,7 @@ if (isset($_POST['update_post'])) {
         <input type="file" name=" user_image" id="user_image" class="form-control">
     </div>
     <div class="form-group">
-        <input type="submit" class="btn btn-primary" name="update_post" value="Update Post">
+        <input type="submit" class="btn btn-primary" name="update_user" value="Update User">
     </div>
 
 </form>

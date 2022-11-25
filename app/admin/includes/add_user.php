@@ -20,6 +20,7 @@ if (isset($_POST['create_user'])) {
     $stmt->bind_param("ssssssss", $username, $user_password, $user_firstname, $user_lastname, $user_email, $user_role, $user_image, $random_salt);
     $stmt->execute();
     $stmt->close();
+    echo "User Created: " . " " . "<a href='users.php'>View Users</a>";
 }
 ?>
 <form action="" method="post" enctype="multipart/form-data">

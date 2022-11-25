@@ -49,8 +49,6 @@ include "includes/header.php";
                     <hr>
             <?php
                 }
-            } else {
-                echo "<h1>NO POSTS AVAILABLE</h1>";
             }
             ?>
 

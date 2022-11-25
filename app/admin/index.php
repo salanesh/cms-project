@@ -14,12 +14,13 @@ include "includes/admin_header.php";
         <div class="col-lg-12">
           <h1 class="page-header">
             Welcome to Admin
-            <small>Author</small>
+            <small><?php echo $_SESSION['username']; ?></small>
           </h1>
 
         </div>
       </div>
       <!-- /.row -->
+      <?php include "includes/admin_widgets.php"; ?>
     </div>
     <!-- /.container-fluid -->
   </div>
