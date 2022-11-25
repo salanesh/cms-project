@@ -68,7 +68,16 @@ if (isset($_POST['update_post'])) {
     </div>
     <div class="form-group">
         <label for="post_status">Post Status</label>
-        <input type="text" value="<?php echo $post_status; ?>" name="post_status" id="post_status" class="form-control">
+        <select name="post_status" id="post_status">
+            <option value="<?php echo $post_status; ?>"><?php echo $post_status; ?></option>
+            <?php
+            if ($post_status == 'Published') {
+                echo '<option value="draft">draft</option>';
+            } else {
+                echo '<option value="Published">Published</option>';
+            }
+            ?>
+        </select>
     </div>
     <div class="form-group">
         <label for="post_image">Post Image</label>
@@ -81,7 +90,7 @@ if (isset($_POST['update_post'])) {
     </div>
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea name="post_content" id="post_content" cols="30" rows="10"><?php echo $post_content; ?></textarea>
+        <textarea name="post_content" id="summernote" cols="30" rows="10"><?php echo $post_content; ?></textarea>
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary" name="update_post" value="Update Post">
