@@ -55,6 +55,6 @@ if (isset($_GET['delete'])) {
     $stmt->bind_param("i", $delete_post_id);
     $stmt->execute();
     $stmt->close();
-    header("Location: posts.php");
+    header("Location: posts.php?success=3");
 }
 ?>

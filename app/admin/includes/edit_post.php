@@ -42,7 +42,7 @@ if (isset($_POST['update_post'])) {
     $stmt->bind_param("ssissssi", $post_title, $post_author, $post_category_id, $post_status, $post_image, $post_tags, $post_content, $_GET['p_id']);
     $stmt->execute();
     $stmt->close();
-    header("Location: posts.php");
+    header("Location: posts.php?success=2");
 }
 ?>
 <form action="" method="post" enctype="multipart/form-data">

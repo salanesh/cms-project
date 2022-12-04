@@ -12,9 +12,30 @@ include "includes/admin_header.php";
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
+                    <?php
+                    if (isset($_GET['success'])) {
+                        switch ($_GET['success']) {
+                            case 1:
+                                echo '<div class="row bg-success">
+                                  <h3 class="text-center">New post has been added</h3>
+                                  </div>';
+                                break;
+                            case 2:
+                                echo '<div class="row bg-success">
+                                  <h3 class="text-center">Post has been updated</h3>
+                                  </div>';
+                                break;
+                            case 3:
+                                echo '<div class="row bg-success">
+                                  <h3 class="text-center">Post has been deleted</h3>
+                                  </div>';
+                                break;
+                        }
+                    }
+                    ?>
                     <h1 class="page-header">
-                        Welcome to Admin
-                        <small>Author</small>
+                        Welcome to Posts
+                        <small><?php echo $_SESSION['username']; ?></small>
                     </h1>
                     <?php
                     if (isset($_GET['source'])) {
