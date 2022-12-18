@@ -34,11 +34,11 @@ if (isset($_POST["bulk"])) {
         <option value="Published">publish</option>
         <option value="delete">delete</option>
     </select>
-    <button type="submit" class="btn-success" name="bulk" value="bulkEdit">submit</button>
+    <button type="submit" class="btn-success" name="bulk" value="bulkEdit">apply</button>
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>Select</th>
+                <th>Select <input type="checkbox" id="checkAll"></th>
                 <th>ID</th>
                 <th>Author</th>
                 <th>Title</th>
@@ -69,7 +69,7 @@ if (isset($_POST["bulk"])) {
                 $post_comment_count = $row["post_comment_count"];
                 $post_date = $row["post_date"];
                 echo "<tr>";
-                echo "<td><input type='checkbox' name='selected[]' value='$post_id'></td>";
+                echo "<td><input type='checkbox' name='selected[]' value='$post_id' class='table-boxes'></td>";
                 echo "<td>{$post_id}</td>";
                 echo "<td>{$post_author}</td>";
                 echo "<td>{$post_title}</td>";
