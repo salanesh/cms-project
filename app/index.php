@@ -27,7 +27,7 @@ include "includes/header.php";
 
             ?>
                     <h1 class="page-header">
-                        Page Heading
+                        CMS PROJECT
                         <small>Secondary Text</small>
                     </h1>
 
